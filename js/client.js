@@ -1,4 +1,5 @@
-const socket = io('http://172.16.138.120:8000');
+// Update the server URL to your Render hosting link
+const socket = io('https://chatwebapp-useo.onrender.com');
 
 const form = document.getElementById('send-container')
 const messageInput = document.getElementById('messageInp')
