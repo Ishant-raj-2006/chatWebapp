@@ -12,6 +12,9 @@ body{
     background-color: rgb(243, 216, 216);
     margin: auto;
     height: 50vh;
+    padding: 33px;
+    overflow-y:auto ;
+    margin-bottom: 23px;
 }
 .message{
 background-color: gray;
