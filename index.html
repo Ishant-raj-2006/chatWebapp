@@ -7,12 +7,34 @@
 <script defer src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 <script defer src="js/client.js"></script>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <nav>
-        <img class ="logo" src="chat.png" alt="">
+        <div class="nav-left">
+            <img class ="logo" src="chat.png" alt="">
+            <span>WhatsApp Clone</span>
+        </div>
+        <div class="nav-right">
+            <button id="voiceCallBtn" class="call-btn"><i class="fas fa-phone"></i></button>
+            <button id="videoCallBtn" class="call-btn"><i class="fas fa-video"></i></button>
+        </div>
     </nav>
+
+    <!-- Video Call Overlay -->
+    <div id="videoOverlay" class="video-overlay hidden">
+        <div class="video-wrapper">
+            <video id="remoteVideo" autoplay playsinline></video>
+            <video id="localVideo" autoplay playsinline muted></video>
+            <div class="call-controls">
+                <button id="muteBtn" class="control-btn"><i class="fas fa-microphone"></i></button>
+                <button id="endCallBtn" class="control-btn end-call"><i class="fas fa-phone-slash"></i></button>
+                <button id="cameraBtn" class="control-btn"><i class="fas fa-video"></i></button>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
     </div>
     <div class="send">

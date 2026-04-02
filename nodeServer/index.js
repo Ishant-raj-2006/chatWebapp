@@ -21,6 +21,30 @@ io.on('connection', socket => {
         socket.broadcast.emit('receive', { message: message, name: users[socket.id] });
     });
 
+    // Signaling for Video/Voice Calls
+    socket.on('call-user', data => {
+        socket.broadcast.emit('incoming-call', {
+            from: socket.id,
+            name: users[socket.id],
+            offer: data.offer,
+            type: data.type // 'video' or 'voice'
+        });
+    });
+
+    socket.on('make-answer', data => {
+        socket.to(data.to).emit('call-answered', {
+            from: socket.id,
+            answer: data.answer
+        });
+    });
+
+    socket.on('ice-candidate', data => {
+        socket.broadcast.emit('ice-candidate', {
+            candidate: data.candidate,
+            from: socket.id
+        });
+    });
+
     // If someone leaves the chat, let others know 
     socket.on('disconnect', message => {
         socket.broadcast.emit('left', users[socket.id]);
