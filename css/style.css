@@ -39,6 +39,12 @@ clear: both;
 #messageInp{
 width: 92%;
 border: 2px solid yellowgreen;
-border: radius 6px ;
+border-radius: 10px;
 height: 34px;
+}
+.btn{
+    cursor: pointer;
+    border: 2px solid yellow;
+    border-radius: 6px;
+    height: 34px;
 }
