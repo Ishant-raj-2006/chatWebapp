@@ -1,53 +1,174 @@
-.logo{
-    display: block;
-    margin: auto;
-    width: 50px;
-    height: 50px;
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --bg-color: #0f172a;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-color: #818cf8;
 }
-body{
-    background-image: linear-gradient(rgb(255,255,255),rgb(31, 107, 138));
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
 }
-.container{
-    max-width: 955px;
-    background-color: rgb(243, 216, 216);
-    margin: auto;
-    height: 50vh;
-    padding: 33px;
-    overflow-y:auto ;
-    margin-bottom: 23px;
+
+body {
+    background-color: var(--bg-color);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(129, 140, 248, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(118, 75, 162, 0.15) 0px, transparent 50%);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-primary);
+    overflow: hidden;
 }
-.message{
-background-color: gray;
-width: 24%;
-padding: 10px;
-margin: 17px 12px;
-border: 2px solid yellow;
-border: radius 10px;
+
+nav {
+    padding: 1rem 0;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.left{
-float: left;
-clear: both;
+
+.logo {
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0 0 10px var(--accent-color));
 }
-.right{
-float: right;
-clear: both;
-}
-#send-container{
-    text-align: center;
-    max-width: 980;
+
+.container {
+    flex: 1;
     width: 100%;
-    display: block;
-    margin: auto;
+    max-width: 800px;
+    margin: 1rem auto;
+    padding: 1.5rem;
+    overflow-y: auto;
+    background: var(--glass-bg);
+    background-image: 
+        radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+    background-size: 24px 24px;
+    backdrop-filter: blur(16px);
+    border-radius: 24px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
-#messageInp{
-width: 92%;
-border: 2px solid yellowgreen;
-border-radius: 10px;
-height: 34px;
+
+.container::-webkit-scrollbar {
+    width: 6px;
 }
-.btn{
+
+.container::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 10px;
+}
+
+.message {
+    max-width: 70%;
+    padding: 12px 20px;
+    margin: 10px 0;
+    border-radius: 18px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    position: relative;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.left {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+
+.right {
+    background: var(--primary-gradient);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+}
+
+.center {
+    align-self: center;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin: 8px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.send {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    padding: 0 1rem;
+}
+
+#send-container {
+    display: flex;
+    gap: 12px;
+    background: var(--glass-bg);
+    padding: 8px;
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+}
+
+#messageInp {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 12px 16px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    outline: none;
+}
+
+#messageInp::placeholder {
+    color: var(--text-secondary);
+}
+
+.btn {
+    background: var(--primary-gradient);
+    border: none;
+    color: white;
+    padding: 0 24px;
+    border-radius: 12px;
+    font-weight: 600;
     cursor: pointer;
-    border: 2px solid yellow;
-    border-radius: 6px;
-    height: 34px;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(118, 75, 162, 0.4);
+}
+
+.btn:active {
+    transform: translateY(0);
 }

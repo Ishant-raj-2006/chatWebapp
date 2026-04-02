@@ -1,15 +1,30 @@
-const { use } = require('react');
-const { Socket } = require('socket.io');
-
 // Node server Which will handle socket io connections 
-const io = require('socket.io')(8000)
-const users ={};
-io.on('connection', Socket =>{
-    Socket.on('new-user-joined',name =>{
-        users[Socket.id] = name;
-        Socket.broadcast.emit('user-joined',name);
-    })
-    Socket.on('send',message =>{
-        Socket.broadcast.emit('receive',{message: message,name: user[Socket.id]})
-    })
-})
+const io = require('socket.io')(8000, {
+    cors: {
+        origin: "*",
+    }
+});
+console.log('Server is running on port 8000...');
+
+const users = {};
+
+io.on('connection', socket => {
+    // If any new user joins, let other users connected to the server know!
+    socket.on('new-user-joined', name => {
+        // console.log('New User', name);
+        users[socket.id] = name;
+        socket.broadcast.emit('user-joined', name);
+    });
+
+    // If someone sends a message, broadcast it to other people
+    socket.on('send', message => {
+        socket.broadcast.emit('receive', { message: message, name: users[socket.id] });
+    });
+
+    // If someone leaves the chat, let others know 
+    socket.on('disconnect', message => {
+        socket.broadcast.emit('left', users[socket.id]);
+        delete users[socket.id];
+    });
+
+});
